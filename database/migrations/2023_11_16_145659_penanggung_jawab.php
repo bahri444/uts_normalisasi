@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('penanggung_jawab_id');
             $table->foreignId('administrasi_id');
             $table->string('pic', 50);
+            $table->timestamps();
             $table->foreign('administrasi_id')->references('administrasi_id')->on('administrasi')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }

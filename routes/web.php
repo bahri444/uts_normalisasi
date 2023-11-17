@@ -4,6 +4,7 @@ use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\BagianController;
 use App\Http\Controllers\KebutuhanController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PenanggungJawabController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +43,10 @@ Route::get('/deletekebutuhan/{id}', [KebutuhanController::class, 'DeleteKebutuha
 
 Route::get('/administrasi', [AdministrasiController::class, 'GetAllAdministration']);
 Route::post('/addadministrasi', [AdministrasiController::class, 'AddAdministration']);
+Route::post('/updateadministrasi', [AdministrasiController::class, 'UpdateAdministration']);
+Route::get('/deleteadministrasi/{id}', [AdministrasiController::class, 'DeleteAdministrasi']);
+
+Route::get('/penanggungjawab', [PenanggungJawabController::class, 'GetAllPenanggungJawab']);
+Route::post('/addpenanggungjawab', [PenanggungJawabController::class, 'AddPenanggungJawab']);
+Route::post('/updatepenanggungjawab', [PenanggungJawabController::class, 'UpdatePenanggungJawab']);
+Route::get('/deletepenanggungjawab/{id}', [PenanggungJawabController::class, 'DeletePenanggungJawab']);

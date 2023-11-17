@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class PenanggungJawab extends Model
 {
     use HasFactory;
-    protected $table = 'administrasi';
-    protected $primaryKey = 'administrasi_id';
+    protected $table = 'penanggung_jawab';
+    protected $primaryKey = 'penanggungjawab_id';
     protected $fillable = ['administrasi_id',    'pic'];
     public $timestamps = true;
+
+    public function JoinToAdministrasi()
+    {
+        return $this->hasMany(Administrasi::class, 'administrasi_id', 'administrasi_id');
+    }
 }

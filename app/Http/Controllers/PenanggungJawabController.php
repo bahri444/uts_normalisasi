@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Administrasi;
 use App\Models\PenanggungJawab;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,9 +14,14 @@ class PenanggungJawabController extends Controller
     // function get all data
     public function GetAllPenanggungJawab()
     {
-        $data = PenanggungJawab::all();
-        // dd($data);
-        return view('/penanggungjawab', ['data' => $data]);
+        $data = PenanggungJawab::with('JoinToAdministrasi')->get();
+        $Administrasi = Administrasi::select('administrasi_id', 'urgenci')->get();
+        // dd($Administrasi);
+        return view('/penanggungjawab', [
+            'title' => 'penanggungjawab',
+            'data' => $data,
+            'administrasi' => $Administrasi,
+        ]);
     }
 
     // function add
@@ -52,7 +58,7 @@ class PenanggungJawabController extends Controller
                 'pic' => $request->post('pic')
             );
             // dd($data);
-            PenanggungJawab::where('penanggungjawab_id', '=', $request->post('penanggungjawab_id'))->update($data);
+            PenanggungJawab::where('penanggung_jawab_id', '=', $request->post('penanggung_jawab_id'))->update($data);
             return redirect('/penanggungjawab')->with('success', 'data berhasil di update');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -64,7 +70,7 @@ class PenanggungJawabController extends Controller
     public function DeletePenanggungJawab($id)
     {
         try {
-            PenanggungJawab::where('penanggungjawab_id', '=', $id)->delete();
+            PenanggungJawab::where('penanggung_jawab_id', '=', $id)->delete();
             return redirect('/penanggungjawab')->with('success', 'data berhasil di hapus..!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
